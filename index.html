@@ -41,22 +41,59 @@
     <style>
         html body {
             font-family: 'Roboto', sans-serif;
-            font-size: 5.0vmin;
+            font-size: 18pt;
             margin: 4vmin;
         }
     </style>
 </head>
 <body>
-<h2 style="text-align: left; font-size: 4vmin;"><a href="">Katex Editor</a></h2>
+<h2 style="text-align: left; font-size: 22pt;"><a href="">Katex Editor</a></h2>
 <br>
-<latex-renderer id="latex-renderer" style="font-size: 4vmin; display: block; /*border: solid 1px; */height: auto; width: auto; padding: 0.4vmin;"></latex-renderer>
+<div>
+<div id="latex-renderer" style="font-size: 18pt; display: inline-block; padding: 0.4vmin;"></div>
+</div>
 <br>
-<textarea style="display: block; padding: 0.4vmin; font-size: 4vmin;" rows=1 id="textarea">2^3</textarea>
+<textarea style="display: none; position: absolute; padding: 0.4vmin; font-size: 18pt;" rows=1 id="textarea">2^3</textarea>
 <br>
 <!--<button style="display: block; margin: 1vmax 0;" id="render-latex-button" type="button" content="">Render Latex</button>-->
 <script>
+    let editing = false;
+
+    document.documentElement.onclick = (ev) => {
+        if (editing === true) {
+            textarea.style.display = "none";
+            editing = false;
+        } else if (ev.target === document.body) {  // TODO: Make this preciser.
+            let newDiv = new DOMParser().parseFromString("<div><div style=\"font-size: 18pt; display: inline-block; padding: 0.4vmin;\"></div></div>", "text/html").body.firstElementChild;
+            document.body.insertBefore(newDiv, latexRenderer.parentElement);
+            newDiv.innerHTML = latexRenderer.innerHTML;
+
+        }
+    }
+
     const latexRenderer = document.getElementById("latex-renderer");
+
+    latexRenderer.onclick = (ev) => {
+        if (editing === false) {
+            const rect = latexRenderer.getBoundingClientRect();
+            const x = rect.right + window.scrollX;
+            const y = rect.bottom + window.scrollY;
+
+            textarea.style.position = 'absolute';
+            textarea.style.left = x + 'px';
+            textarea.style.top = y + 'px';
+            textarea.style.display = "block";
+            editing = true;
+        } else {
+        }
+        ev.stopPropagation();
+    };
+
     const textarea = document.getElementById("textarea");
+
+    textarea.onclick = (ev) => {
+        ev.stopPropagation();
+    }
 
     textarea.onkeyup = (keyboardEvent) => {
         localStorage.setItem('katex', textarea.value);
@@ -64,12 +101,6 @@
             throwOnError: false
         });
     }
-
-    // renderLatexButton.onclick = (mouseEvent) => {
-    //     katex.render(textarea.value, latexRenderer, {
-    //         throwOnError: false
-    //     });
-    // };
 
     katex.render(textarea.value, latexRenderer, {
         throwOnError: false

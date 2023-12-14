@@ -74,7 +74,7 @@
 
     latexRenderer.onclick = (ev) => {
         if (editing === false) {
-            const rect = latexRenderer.getBoundingClientRect();
+            const rect = ev.target.getBoundingClientRect();
             const x = rect.right + window.scrollX;
             const y = rect.bottom + window.scrollY;
 
@@ -91,6 +91,12 @@
 
     textarea.onclick = (ev) => {
         ev.stopPropagation();
+    }
+
+    // This causes textbox to resize as characters are typed
+    textarea.oninput = (ev) => {
+        ev.target.style.height = "1px";
+        ev.target.style.height = ev.target.scrollHeight + "px";
     }
 
     textarea.onkeyup = (keyboardEvent) => {

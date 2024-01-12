@@ -75,7 +75,7 @@
     latexRenderer.onclick = (ev) => {
         if (editing === false) {
             const rect = ev.target.getBoundingClientRect();
-            const x = rect.right + window.scrollX;
+            const x = rect.left + window.scrollX;
             const y = rect.bottom + window.scrollY;
 
             textarea.style.position = 'absolute';

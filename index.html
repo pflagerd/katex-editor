@@ -77,7 +77,7 @@
 
     latexRenderer.onclick = (ev) => {
         if (editing === false) {
-            const rect = ev.target.getBoundingClientRect();
+            const rect = ev.currentTarget.getBoundingClientRect();
             const x = rect.left + window.scrollX;
             const y = rect.bottom + window.scrollY;
 

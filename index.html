@@ -69,7 +69,8 @@
             expressionLog.insertAdjacentHTML("beforeend", "<div style=\"font-size: 18pt; padding: 0.4vmin;\"></div>");
             const lastChild = expressionLog.lastChild;
             lastChild.innerHTML = latexRenderer.innerHTML;
-            expressionLog.insertAdjacentElement("beforeend", latexRenderer)
+            expressionLog.insertAdjacentElement("beforeend", latexRenderer);
+            latexRenderer.click();
         }
     }
 

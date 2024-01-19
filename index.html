@@ -71,6 +71,8 @@
             lastChild.innerHTML = latexRenderer.innerHTML;
             expressionLog.insertAdjacentElement("beforeend", latexRenderer);
             latexRenderer.click();
+            textarea.focus();
+            textarea.selectionStart = textarea.selectionEnd = textarea.value.length;
         }
     }
 
@@ -104,6 +106,14 @@
     }
 
     textarea.onkeyup = (keyboardEvent) => {
+        console.log(keyboardEvent.key);
+        console.log(keyboardEvent.code);
+        console.log();
+        if (keyboardEvent.key === "Enter") {
+            document.documentElement.click();
+            keyboardEvent.stopPropagation();
+            return;
+        }
         localStorage.setItem('katex', textarea.value);
         katex.render(textarea.value, latexRenderer, {
             throwOnError: false

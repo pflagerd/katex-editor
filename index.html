@@ -65,21 +65,27 @@
             textarea.style.display = "none";
             editing = false;
         } else if (ev.target === document.body) {  // TODO: Make this preciser?
-            latexRenderer.remove();
+            const nextToLastChild = expressionLog.lastElementChild;
             expressionLog.insertAdjacentHTML("beforeend", "<div style=\"font-size: 18pt; padding: 0.4vmin;\"></div>");
-            const lastChild = expressionLog.lastChild;
-            lastChild.innerHTML = latexRenderer.innerHTML;
-            expressionLog.insertAdjacentElement("beforeend", latexRenderer);
+            const lastChild = expressionLog.lastElementChild;
+            lastChild.innerHTML = nextToLastChild.innerHTML;
+            lastChild.value = nextToLastChild.value;
+            lastChild.onclick = latexRenderer.onclick;
+            latexRenderer = lastChild;
             latexRenderer.click();
             textarea.focus();
             textarea.selectionStart = textarea.selectionEnd = textarea.value.length;
         }
     }
 
-    const latexRenderer = document.getElementById("latex-renderer");
+    let latexRenderer = document.getElementById("latex-renderer");
 
     latexRenderer.onclick = (ev) => {
-        if (editing === false) {
+        latexRenderer = ev.currentTarget;
+        if (editing) {
+            document.documentElement.click();
+            ev.currentTarget.click();
+        } else {
             const rect = ev.currentTarget.getBoundingClientRect();
             const x = rect.left + window.scrollX;
             const y = rect.bottom + window.scrollY;
@@ -89,6 +95,9 @@
             textarea.style.top = y + 'px';
             textarea.style.display = "block";
             editing = true;
+            textarea.value = ev.currentTarget.value;
+            textarea.focus();
+            textarea.selectionStart = textarea.selectionEnd = textarea.value.length;
         }
         ev.stopPropagation();
     };
@@ -118,11 +127,13 @@
         katex.render(textarea.value, latexRenderer, {
             throwOnError: false
         });
+        latexRenderer.value = textarea.value;
     }
 
     katex.render(textarea.value, latexRenderer, {
         throwOnError: false
     });
+    latexRenderer.value = textarea.value;
 
 </script>
 </body>

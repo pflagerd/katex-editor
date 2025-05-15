@@ -53,7 +53,10 @@
 <div id="latex-renderer" style="font-size: 18pt; padding: 0.4vmin;"></div>
 </div>
 <br>
-<textarea style="display: none; position: absolute; padding: 0.4vmin; font-size: 18pt;" rows=1 id="textarea">2^3</textarea>
+<label for="textarea"></label><textarea style="display: none; position: absolute; padding: 0.4vmin; font-size: 18pt;" rows=1 id="textarea">2^3</textarea>
+<button onclick="document.getElementById('fileInput').click()">📂 Open</button>
+<button onclick="saveAs()">💾 Save As...</button>
+<input type="file" id="fileInput" accept=".html" style="display:none" onchange="loadDiv(event)">
 <br>
 <script>
     let editing = false;
@@ -80,7 +83,7 @@
 
     let latexRenderer = document.getElementById("latex-renderer");
 
-    latexRenderer.onclick = (ev) => {
+    function latexRendererOnClick(ev) {
         latexRenderer = ev.currentTarget;
         if (editing) {
             document.documentElement.click();
@@ -100,7 +103,9 @@
             textarea.selectionStart = textarea.selectionEnd = textarea.value.length;
         }
         ev.stopPropagation();
-    };
+    }
+
+    latexRenderer.onclick = latexRendererOnClick;
 
     const textarea = document.getElementById("textarea");
 
@@ -134,7 +139,49 @@
         throwOnError: false
     });
     latexRenderer.value = textarea.value;
+</script>
+<script>
+    async function saveAs() {
+        const htmlContent = document.getElementById("expression-log").innerHTML;
 
+        try {
+            const handle = await window.showSaveFilePicker({
+                suggestedName: 'div-content.html',
+                types: [{
+                    description: 'HTML Files',
+                    accept: { 'text/html': ['.html'] },
+                }],
+            });
+
+            const writable = await handle.createWritable();
+            await writable.write(htmlContent);
+            await writable.close();
+            console.log("File saved successfully.");
+        } catch (err) {
+            if (err.name !== 'AbortError') {
+                console.error("Save failed:", err);
+                alert("Failed to save file.");
+            }
+        }
+    }
+
+    function loadDiv(event) {
+        const file = event.target.files[0];
+        if (!file) return;
+
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            document.getElementById("expression-log").innerHTML = e.target.result;
+            latexRenderer = document.getElementById("latex-renderer");
+            latexRenderer.onclick = latexRendererOnClick;
+            editing = false;
+            for (let child of document.getElementById("expression-log").children) {
+                child.onclick = latexRenderer.onclick;
+            }
+        };
+        reader.readAsText(file);
+
+    }
 </script>
 </body>
 </html>

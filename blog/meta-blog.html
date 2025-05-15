@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Investing Meta-Blog</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header>
+    <div class="container">
+      <h1>Investing Meta-Blog</h1>
+      <p>Where I write down what I did, how I did it, what I want to do, how I want to do it, and any other information involved in and about the process of creation of the content of the Investing blog.</p>
+      <br/>
+      <!--nav>
+        <ul>
+          <li><a href="#">Home</a></li>
+          <li><a href="#">Articles</a></li>
+          <li><a href="#">About</a></li>
+          <li><a href="#">Contact</a></li>
+        </ul>
+      </nav-->
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="posts">
+      <article class="post">
+        <h3>Meta-Post about the youtube video entitled "Critical Analysis of <a href="https://www.youtube.com/watch?v=qtxkZcpnxcA" target="_blank">Government Report Reveals A LOT of People Are About to Lose Their Jobs</a>"</h3>
+        <p class="meta">This video is from <a href="">Eurodollar University</a>, a guy named Jeff Snyder who I find sometimes compelling and always interesting.</p>
+        <p class="meta">May 12, 2025 by Daniel</p>
+        <p>I've created a directory called <code>.issues/</code> in which I want to put code/data/everything pertaining to creating a repository-hosted equivalent to github.com which requires only a browser to access it, but which also has features for command-line (bash) access to the same content in plain text.</p>
+        <p>I created an issue <a href="https://github.com/pflagerd/investing/issues/10" target="_blank">#10</a> in <a href="https://github.com/pflagerd/investing/issues" target="_blank">github.com/pflagerd/investing</a>.  As I add content to it, I'll want to add equivalent content (and tools) to <code>.issues/</code></p>
+        <p>I added a css rule for <code>code</code> which defined the font-size to be 120% em - since all the code elements will appear within the &ltbody&gt element.  I used <code title="kde screen capture tool: kde-spectacle/oracular,now 24.05.2-1ubuntu1 amd64">spectacle</code>'s rectangle-capture to measure and compare the height of characters displayed herein. The code characters were visibly smaller than the body text characters until I made this change.</code></p>
+        <p>I added a folder <code>.issues/10/</code> to contain the repository-hosted version of issue <a href="https://github.com/pflagerd/investing/issues/10" target="_blank">#10</a>.</p>
+        <p>I created an html fragment <code>.issues/10/title.html</code> containing the issue's title.  Unlike github.com titles, this title contains a hyperlink.  If everything is html, then we could have way more interesting features in the repository-hosted issue-tracking system.</p>
+        <p>I put a screenshot of a youtube.com summary thumbnail in <code>.issues/10/images/Screenshot_20250512_101928.png</code></p>
+        <p>I cloned several github projects any one of which might serve as the means of displaying the issues as an issue-tracker: </p>
+        <table border="1">
+          <colgroup>
+            <col style="width: 20%;">
+            <col style="width: 80%;">
+          </colgroup>
+          <thead>
+          <tr>
+            <th>                   </th>
+            <th>Description</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr>
+            <td>chromium-template</td>
+            <td>HTML5/CSS3/Javascript web content to be displayed directly with chromium without a web server.</td>
+          </tr>
+          <tr>
+            <td>electron-template</td>
+            <td>HTML5/CSS3/Javascript content to be displayed and interacted with using Electron.</td>
+          </tr>
+          <tr>
+            <td>express-template</td>
+            <td>Express server to be used in conjunction with HTML5/CSS3/Javascript content</td>
+          </tr>
+          <tr>
+            <td>fastapi-template</td>
+            <td>FastAPI server to be used in conjunction with HTML5/CSS3/Javascript content</td>
+          </tr>
+          </tbody>
+        </table>
+        <p>I don't know which one of these I'll use, but I'm leaning towards express-template.</p>
+        <p>I then adjusted <code>styles.css</code> to make the <code>code</code> style be 1.16em instead of 1.20em, since it looks better in the paragraph immediately above this one. The original size made S<code>.issues/10/images/Screenshot_20250512_101928.png</code> look too big relative to body text.  But after fiddling with that and remeasuring, I put it back to 1.20em</p>
+        <p>If I'm surfing to <code>.issues</code> with bash, I'd like to see a text-only rendering of the contents of the issue when I type <code>ls</code>.</p>
+        <p>I'm thinking I could achieve this by providing <code>.issues/bin/ls</code> which is aware of relative paths and changes the output accordingly.  In this way, <code>ls</code> will appear to behave the same as the stock <code>ls</code> if the current directory needs no unique issue-tracking "overrides".  To do this, I'd need some way for the shell session to search the <code>.issues/bin</code> path first.</p>
+        <p>I created a bash script <code>.issues/bin/ls</code> which displays issues.  It is very very incomplete and only works when passed NO arguments.</p>
+        <p>To use <code>.issues/bin/ls</code>, you must explicitly add the absolute pathname of <code>.issues/bin</code> to the beginning of <code>PATH</code> and then do <code>hash -r</code>.</p>
+        <p>It looks like this:</p>
+        <img style="width: 1000px;" src="images/Screenshot_20250512_165503.png" alt="image of ls command displaying issue number and title">
+        <p>I downloaded the video to <a href="file:///home/oy753c/Videos/Government%20Report%20Reveals%20A%20LOT%20of%20People%20Are%20About%20to%20Lose%20Their%20Jobs-qtxkZcpnxcA.webm" target="_blank"><code>"/home/oy753c/Videos/Government Report Reveals A LOT of People Are About to Lose Their Jobs-qtxkZcpnxcA.webm"</code></a> using a tool called <a href="https://snapcraft.io/ultimate-media-downloader" target="_blank">Ultimate Media Downloader</a>.</p>
+        <p>I'd like to extract the text from it, because transcripts don't appear to be available for the video on youtube.com</p>
+        <p>For this I cloned <a href="git@github.com:pflagerd/youtube-to-text.git" title="git clone git@github.com:pflagerd/youtube-to-text.git">git@github.com:pflagerd/youtube-to-text.git</a> to the investing desktop.</p>
+      </article>
+
+<!--      <article class="post">-->
+<!--        <h3><a href="#">Semantic HTML Explained</a></h3>-->
+<!--        <p class="meta">Posted on March 20, 2025 by Cody</p>-->
+<!--        <p>Semantic HTML brings meaning to your markup, making it more accessible and SEO-friendly...</p>-->
+<!--      </article>-->
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <p>&copy; 2025 Daniel P. Pflager. All rights reserved.</p>
+    </div>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>katex-editor</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header>
+    <div class="container">
+      <h1>katex-editor</h1>
+      <p>A self-contained chromium-based katex editor</p>
+      <p>There's a meta-blog <a href="meta-blog.html" target="_blank">here</a> where I track my progress on modifying/improving this blog code.</p>
+      <br/>
+      <nav>
+        <ul>
+          <li><a href="#">Home</a></li>
+          <li><a href="#">Articles</a></li>
+          <li><a href="#">About</a></li>
+          <li><a href="#">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="posts">
+      <article id="article-1" class="post">
+        <h3>Adding "Save As" feature</h3>
+        <p class="meta">I cannot currently save the contents of a katex-editor session and restore them later.</p>
+        <p class="meta">250515 07:59 by Daniel</p>
+        <!--p>If I'm going to to a critical analysis of this video, I will probably need to</p>
+        <ul style="margin-left: 2em;">
+          <li>1) be able to navigate it with a video viewer which allows me to easily move forward and backward in little chunks</li>
+          <li>2) find start and end times</li>
+          <li>3) be able to navigate quickly to those start and end times</li>
+          <li>4) refine those times with numeric values</li>
+          <li>5) extract a transcript from the video</li>
+          <li>6) be able to navigate to any point in the video by clicking on a word or phrase from the transcript</li>
+          <li>7) unambiguously represent the content of the transcript in cases where the language is ambiguous.</li></ul>
+        <p>1-4 sound like requirements for a new or existing tool. Perhaps I should do a search for such a tool.</p>
+        <p>5-7 sound like requirements for another tool, or perhaps requirements of new new tool. Perhaps I should do a search for such a tool.</p>
+        <form style="margin-left: 2em;" action="">
+          <input type="checkbox" id="search-1-4" name="vehicle1" value="Bike">
+          <label for="search-1-4">Search for an existing tool for requirements 1-4</label><br>
+          <input type="checkbox" id="search-5-7" name="vehicle2" value="Car">
+          <label for="search-5-7">Search for an existing tool for requirements 5-7</label><br>
+          <!--input type="submit" value="Submit"->
+        </form>
+        <form style="margin-left: 2em;" action="">
+          <input type="checkbox" id="design-1-4" name="vehicle1" value="Bike">
+          <label for="design-1-4">Design a new tool for requirements 1-4</label><br>
+          <input type="checkbox" id="design-5-7" name="vehicle2" value="Car">
+          <label for="design-5-7">Design a new tool for requirements 5-7</label><br>
+          <!--input type="submit" value="Submit"->
+        </form>
+        <br>
+        <p>Meanwhile, let's see if I can extract a transcript using <a href="https://github.com/pflagerd/youtube-to-text" target="_blank">https://github.com/pflagerd/youtube-to-text</a>.</p>
+        <p>I downloaded and added it as a repo to my <a href="not implemented yet" target="_blank">investing activity repository</a>.</p>
+
+        <script>
+          const article = document.getElementById("article-1");
+          console.log("Article parsed.");
+          const search_1_4 = document.getElementById("search-1-4");
+          const search_5_7 = document.getElementById("search-5-7");
+          const design_1_4 = document.getElementById("design-1-4");
+          const design_5_7 = document.getElementById("design-5-7");
+          search_1_4.onclick = function() {
+            console.log("search_1_4.onclick() was executed")
+          }
+          search_5_7.onclick = function() {
+            console.log("search_5_7.onclick() was executed")
+          }
+          design_1_4.onclick = function() {
+            console.log("design_1_4.onclick() was executed")
+          }
+          design_5_7.onclick = function() {
+            console.log("design_5_7.onclick() was executed")
+          }
+            </script->
+      </article>
+
+<!--      <article class="post">-->
+<!--        <h3><a href="#">Semantic HTML Explained</a></h3>-->
+<!--        <p class="meta">Posted on March 20, 2025 by Cody</p>-->
+<!--        <p>Semantic HTML brings meaning to your markup, making it more accessible and SEO-friendly...</p>-->
+<!--      </article>-->
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <p>&copy; 2025 Daniel P. Pflager. All rights reserved.</p>
+    </div>
+  </footer>
+  <script>
+  </script>
+</body>
+</html>

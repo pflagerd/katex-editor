@@ -97,9 +97,9 @@
             textarea.style.left = x + 'px';
             textarea.style.top = y + 'px';
             textarea.style.display = "block";
+            textarea.value = ev.currentTarget.value;
             textarea.style.height = "1px";
             textarea.style.height = textarea.scrollHeight + "px";
-            textarea.value = ev.currentTarget.value;
             textarea.focus();
             textarea.selectionStart = textarea.selectionEnd = textarea.value.length;
             editing = true;

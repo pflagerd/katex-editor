@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Folder Browser</title>
+  <style>
+    body { font-family: sans-serif; padding: 20px; }
+    h1 { font-size: 1.5em; }
+    ul { list-style-type: none; padding: 0; }
+    li { padding: 4px 0; }
+    .folder { font-weight: bold; }
+    .error { color: red; }
+  </style>
+</head>
+<body>
+  <h1>Folder Contents</h1>
+  <div id="path-display"></div>
+  <ul id="file-list"></ul>
+  <div class="error" id="error"></div>
+
+  <script>
+    const urlParams = new URLSearchParams(window.location.search);
+    const path = urlParams.get('path');
+    const pathDisplay = document.getElementById('path-display');
+    const fileList = document.getElementById('file-list');
+    const errorDisplay = document.getElementById('error');
+
+    if (!path) {
+      errorDisplay.textContent = 'No path provided in query string.';
+    } else {
+      pathDisplay.textContent = `Path: ${path}`;
+      fetch(`/api/list?path=${encodeURIComponent(path)}`)
+        .then(res => res.json())
+        .then(data => {
+          if (data.error) {
+            errorDisplay.textContent = data.error;
+          } else {
+            data.forEach(item => {
+              const li = document.createElement('li');
+              li.textContent = item.name;
+              li.className = item.type;
+              fileList.appendChild(li);
+            });
+          }
+        })
+        .catch(err => {
+          errorDisplay.textContent = 'Error fetching directory contents.';
+        });
+    }
+  </script>
+</body>
+</html>

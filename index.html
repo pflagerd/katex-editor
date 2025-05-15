@@ -56,7 +56,7 @@
 <label for="textarea"></label><textarea style="display: none; position: absolute; padding: 0.4vmin; font-size: 18pt;" rows=1 id="textarea">2^3</textarea>
 <button onclick="document.getElementById('fileInput').click()">📂 Open</button>
 <button onclick="saveAs()">💾 Save As...</button>
-<input type="file" id="fileInput" accept=".html" style="display:none" onchange="loadDiv(event)">
+<input type="file" id="fileInput" accept=".katex" style="display:none" onchange="loadDiv(event)">
 <br>
 <script>
     let editing = false;
@@ -97,10 +97,12 @@
             textarea.style.left = x + 'px';
             textarea.style.top = y + 'px';
             textarea.style.display = "block";
-            editing = true;
+            textarea.style.height = "1px";
+            textarea.style.height = textarea.scrollHeight + "px";
             textarea.value = ev.currentTarget.value;
             textarea.focus();
             textarea.selectionStart = textarea.selectionEnd = textarea.value.length;
+            editing = true;
         }
         ev.stopPropagation();
     }
@@ -142,19 +144,23 @@
 </script>
 <script>
     async function saveAs() {
-        const htmlContent = document.getElementById("expression-log").innerHTML;
-
         try {
             const handle = await window.showSaveFilePicker({
-                suggestedName: 'div-content.html',
+                suggestedName: 'content.katex',
                 types: [{
-                    description: 'HTML Files',
-                    accept: { 'text/html': ['.html'] },
+                    description: 'Katex Files',
+                    accept: { 'text/plain': ['.katex'] },
                 }],
             });
 
             const writable = await handle.createWritable();
-            await writable.write(htmlContent);
+            let katexContent = "";
+            for (let child of document.getElementById("expression-log").children) {
+                if (katexContent)
+                    katexContent += "\n";
+                katexContent += child.value;
+            }
+            await writable.write(katexContent); // This appends a trailing \n even if there was already one.
             await writable.close();
             console.log("File saved successfully.");
         } catch (err) {
@@ -171,16 +177,24 @@
 
         const reader = new FileReader();
         reader.onload = function(e) {
-            document.getElementById("expression-log").innerHTML = e.target.result;
-            latexRenderer = document.getElementById("latex-renderer");
-            latexRenderer.onclick = latexRendererOnClick;
             editing = false;
-            for (let child of document.getElementById("expression-log").children) {
-                child.onclick = latexRenderer.onclick;
+
+            const lines = e.target.result.split("\n");
+            expressionLog.innerHTML = ''
+            for (let line of lines) {
+                expressionLog.insertAdjacentHTML("beforeend", "<div style=\"font-size: 18pt; padding: 0.4vmin;\"></div>");
+                const child = expressionLog.lastElementChild;
+                latexRenderer = child;
+                child.innerHTML = line;
+                child.value = line;
+                child.onclick = latexRendererOnClick;
+                localStorage.setItem('katex', textarea.value);
+                katex.render(child.value, child, {
+                    throwOnError: false
+                });
             }
         };
         reader.readAsText(file);
-
     }
 </script>
 </body>

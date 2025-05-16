@@ -98,6 +98,18 @@
         <p>I'd need a complete set of "operations" along with a definition for each.</p>
         <p>For example, the "resizing" operation has "extents" which go from the minimum possible resizing horizontally and vertically using all the possible resizing methods.</p>
         <p>Resizing methods include resize by dragging top of window, resize by dragging lower right corner of window, resize by dragging upper left corner of window, etc.</p>
+        <p>In my mind, I see a small web page or image that has a window with representative screen elements displayed and labelled so that the programmer will know what's what, but how to do this is a little iffy.</p>
+        <p>Some options:</p>
+        <ul style="margin-left: 2em;">
+          <li>1) Take a screenshot of a couple actual katex editor sessions and then mark it up somehow.</li>
+          <li>2) Draw a sort of schematic screen design and mark that up</li>
+          <li>3) Use the CanvasAPI or SVG api to draw a schematic screen design including markups.</li>
+          <li>4) Use inkscape to draw a schematic OR to mark up the screenshot from 1 OR use inkscape to do 2</li>
+          <li>5) Use <a href="https://excalidraw.com/" target="_blank">Excalidraw</a> to draw a schematic and mark it up, then somehow render the Excalidraw as a local web page (maybe captured with Chromium Save As or SingleFile)</li>
+          <li>6) Use hover-overs in katex editor's HTML to tell about each of its elements whilst highlighting them a) when the user hovers, or b) as some kind of dynamic mark-up displayable via some magic keystroke or javascript</li>
+        </ul><br>
+        <p>I should probably also make explicit classes for each of the screen elements, because the current code sucks.</p>
+        <p>I kind of like the idea of the mark-up being a sort of hidden code feature.</p>
       </article>
 
 

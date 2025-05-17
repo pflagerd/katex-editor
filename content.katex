@@ -6,10 +6,14 @@
 5^{\frac{1}{(5^4)}}=t^{\frac{1}{t}}
 \text{1. transform LHS to look like RHS}
 \text{2. use variable substitution}
-5^{\frac{1}{(5^4)}}=t^{\frac{1}{t}}
-(\frac{5^3}{5^3}5)^{\frac{1}{(5^4)}}=t^{\frac{1}{t}}
-(\frac{a}{b})^x=\frac{a^x}{b^x}
-(ab)^x=a^xb^x
-(\frac{5^4}{5^3})^{\frac{1}{(5^4)}}=t^{\frac{1}{t}}
-(\frac{(5^4)^{\frac{1}{(5^4)}}}{(5^3)^{\frac{1}{(5^4)}}})=t^{\frac{1}{t}}
-(\frac{(5^4)^{\frac{1}{(5^4)}}}{(5)^{\frac{3}{(5^4)}}})=t^{\frac{1}{t}}
+
+
+(a^b)^{\frac{1}{(a^c)}}=t^{\frac{1}{t}}
+b=1, c=4
+\text{1. increase }b \text{ to make it the same as }c
+\text{2. decrease }c \text{ to make it the same as }b
+\text{3. increase }b \text{ to make it the same as }c \text{ and decrease }c \text{ to make it the same as }b
+\text{4. decrease }b \text{ and }c \text{ until they're the same }
+\text{5. increase }b \text{ and }c \text{ until they're the same }
+\text{Must }b\text{ and }c\text{ change by the same amount? }
+\text{We think in terms of balance, but there are cases such as logs where "balance" is maintained where two variables change in very different values }
